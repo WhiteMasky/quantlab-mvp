@@ -1,0 +1,24 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "quantlab-local"
+version = "0.1.0"
+description = "Local-only, research-first US equity laboratory with fail-closed execution"
+requires-python = ">=3.10"
+dependencies = [
+  "fastapi>=0.115,<1", "uvicorn>=0.32,<1", "pydantic>=2.9,<3",
+  "numpy>=2.0,<3", "pandas>=2.2,<3", "pyarrow>=18,<24",
+  "exchange-calendars>=4.6,<5", "httpx>=0.27,<1"
+]
+
+[project.optional-dependencies]
+test = ["pytest>=8,<10"]
+
+[tool.setuptools.packages.find]
+include = ["quantlab*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q --import-mode=importlib"

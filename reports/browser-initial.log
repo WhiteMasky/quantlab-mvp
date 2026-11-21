@@ -1,0 +1,34 @@
+PASS empty state has real initial cash and no fabricated return
+PASS invalid lookback rejected before submission
+PASS trend real computation, equity, benchmark, drawdown and simulated fills
+PASS all six desktop pages render without horizontal document overflow
+PASS order search, fill tab and actual record download
+PASS identical experiment replays sealed evidence without duplicate fills
+PASS emergency halt is acknowledged while research is still busy
+PASS halt prevents new submissions; cancellation separately authorized and never liquidates
+PASS 390px mobile menu, overview and order table keep content within viewport
+PASS injected 503 preserves stale evidence and explicit refresh recovers
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
++ actual - expected
+
++ [
++   'Failed to load resource: the server responded with a status of 404 (Not Found)'
++ ]
+- []
+
+    at file:///home/zyc/Documents/Qoder/2026-11-21/2d80d420/scripts/browser-demo.mjs:149:10 {
+  generatedMessage: true,
+  code: 'ERR_ASSERTION',
+  actual: [
+    'Failed to load resource: the server responded with a status of 404 (Not Found)'
+  ],
+  expected: [],
+  operator: 'deepStrictEqual',
+  diff: 'simple'
+}
+
+Node.js v24.22.3

@@ -1,0 +1,5 @@
+{
+  "initial_batch": {"count": 10, "parallel": true, "subagents_forbidden": true, "roles": ["data", "research", "strategy", "backtest", "validation", "portfolio", "risk", "broker", "service", "product-test"], "completed": ["strategy"], "interrupted_by_remote_403": ["data", "research", "backtest", "validation", "portfolio", "risk", "broker", "service", "product-test"]},
+  "recovery_batch": {"roles": ["data", "portfolio", "validation", "broker", "service", "product-test"], "parallel": true, "coordinator_takeover": ["backtest", "risk-fix", "research-review", "integration"], "completed": ["data", "portfolio", "validation", "broker", "service", "product-test"], "all_recovery_work_reviewed": true},
+  "note": "Agent summaries are not validation evidence; coordinator tests and file review are recorded separately."
+}

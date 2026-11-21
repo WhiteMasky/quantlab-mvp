@@ -1,0 +1,12 @@
+{
+  "enabled": false,
+  "host": "127.0.0.1",
+  "port": null,
+  "account": "",
+  "client_id": null,
+  "environment": "PAPER",
+  "official_api_version": null,
+  "timeout_seconds": 10.0,
+  "heartbeat_seconds": 15.0,
+  "max_requests_per_second": 10
+}

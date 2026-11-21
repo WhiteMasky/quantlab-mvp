@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuites name="vitest tests" tests="43" failures="0" errors="0" time="5.683651981">
+    <testsuite name="src/App.test.tsx" timestamp="2026-11-21T18:13:27.045Z" hostname="c3licj60dheamyn" tests="21" failures="0" errors="0" skipped="0" time="5.321181468">
+        <testcase classname="src/App.test.tsx" name="local console and honest state &gt; shows all six navigation pages, permanent safety labels, and no fabricated metrics" time="0.877638453">
+        </testcase>
+        <testcase classname="src/App.test.tsx" name="local console and honest state &gt; does not present an unloaded dataset as a successful quality check" time="0.041493311">
+        </testcase>
+        <testcase classname="src/App.test.tsx" name="local console and honest state &gt; shows initial loading without a fallback result" time="0.048647852">
+        </testcase>
+        <testcase classname="src/App.test.tsx" name="local console and honest state &gt; recovers from a disconnected API only on explicit refresh" time="0.159474827">
+        </testcase>
+        <testcase classname="src/App.test.tsx" name="local console and honest state &gt; closes the mobile drawer after navigation" time="0.452733021">
+        </testcase>
+        <testcase classname="src/App.test.tsx" name="bounded, explicit offline experiment &gt; rejects invalid 回看窗口 9 before any POST" time="0.117202256">
+        </testcase>
+        <testcase classname="src/App.test.tsx" name="bounded, explicit offline experiment &gt; rejects invalid 回看窗口 127 before any POST" time="0.125829417">
+        </testcase>
+        <testcase classname="src/App.test.tsx" name="bounded, explicit offline experiment &gt; rejects invalid 回看窗口 63.5 before any POST" time="0.115313696">
+        </testcase>
+        <testcase classname="src/App.test.tsx" name="bounded, explicit offline experiment &gt; rejects invalid 随机种子 -1 before any POST" time="0.121935497">
+        </testcase>
+        <testcase classname="src/App.test.tsx" name="bounded, explicit offline experiment &gt; rejects invalid 随机种子 2147483648 before any POST" time="0.114700136">
+        </testcase>
+        <testcase classname="src/App.test.tsx" name="bounded, explicit offline experiment &gt; rejects invalid 随机种子 0.5 before any POST" time="0.122030852">
+        </testcase>
+        <testcase classname="src/App.test.tsx" name="bounded, explicit offline experiment &gt; accepts engine boundary lookback=10 seed=0" time="0.141391007">
+        </testcase>
+        <testcase classname="src/App.test.tsx" name="bounded, explicit offline experiment &gt; accepts engine boundary lookback=126 seed=2147483647" time="0.150367794">
+        </testcase>
+        <testcase classname="src/App.test.tsx" name="bounded, explicit offline experiment &gt; sends edited integer parameters once, disables duplicates, and refreshes actual results" time="0.540129786">
+        </testcase>
+        <testcase classname="src/App.test.tsx" name="bounded, explicit offline experiment &gt; fails closed for an unsafe environment {&quot;environment&quot;:&quot;UNKNOWN&quot;,&quot;live_enabled&quot;:false}" time="0.096667973">
+        </testcase>
+        <testcase classname="src/App.test.tsx" name="bounded, explicit offline experiment &gt; fails closed for an unsafe environment {&quot;environment&quot;:&quot;SIMULATED&quot;,&quot;live_enabled&quot;:true}" time="0.100615297">
+        </testcase>
+        <testcase classname="src/App.test.tsx" name="bounded, explicit offline experiment &gt; keeps prior evidence but blocks retry after uncertain mutation failure" time="0.387568313">
+        </testcase>
+        <testcase classname="src/App.test.tsx" name="separate halt and cancellation safety boundaries &gt; keeps emergency halt available while a research POST is still running" time="0.71222076">
+        </testcase>
+        <testcase classname="src/App.test.tsx" name="separate halt and cancellation safety boundaries &gt; requires a halt reason, persists the returned state, and never sends cancellation" time="0.352678769">
+        </testcase>
+        <testcase classname="src/App.test.tsx" name="separate halt and cancellation safety boundaries &gt; requires separate explicit consent for cancellation and permits safe dismissal" time="0.328224122">
+        </testcase>
+        <testcase classname="src/App.test.tsx" name="execution logs &gt; filters actual orders and fills, preserving honest no-match states" time="0.209679072">
+        </testcase>
+    </testsuite>
+    <testsuite name="src/api.test.ts" timestamp="2026-11-21T18:13:27.052Z" hostname="c3licj60dheamyn" tests="6" failures="0" errors="0" skipped="0" time="0.016583845">
+        <testcase classname="src/api.test.ts" name="same-origin contract client &gt; sends local JSON mutations without credentials or a live endpoint" time="0.009161672">
+        </testcase>
+        <testcase classname="src/api.test.ts" name="same-origin contract client &gt; preserves structured backend errors rather than returning fake results" time="0.002370151">
+        </testcase>
+        <testcase classname="src/api.test.ts" name="same-origin contract client &gt; rejects an HTML proxy response" time="0.000926168">
+        </testcase>
+        <testcase classname="src/api.test.ts" name="same-origin contract client &gt; rejects incompatible snapshot structures" time="0.000735706">
+        </testcase>
+        <testcase classname="src/api.test.ts" name="same-origin contract client &gt; reports a disconnection and never retries a mutation automatically" time="0.000699554">
+        </testcase>
+        <testcase classname="src/api.test.ts" name="same-origin contract client &gt; propagates aborts so StrictMode cleanup does not appear as an API failure" time="0.000745149">
+        </testcase>
+    </testsuite>
+    <testsuite name="src/components.test.tsx" timestamp="2026-11-21T18:13:27.054Z" hostname="c3licj60dheamyn" tests="16" failures="0" errors="0" skipped="0" time="0.345886668">
+        <testcase classname="src/components.test.tsx" name="numeric evidence &gt; never turns missing/invalid null into a metric" time="0.002460943">
+        </testcase>
+        <testcase classname="src/components.test.tsx" name="numeric evidence &gt; never turns missing/invalid undefined into a metric" time="0.000618231">
+        </testcase>
+        <testcase classname="src/components.test.tsx" name="numeric evidence &gt; never turns missing/invalid &quot;&quot; into a metric" time="0.000423916">
+        </testcase>
+        <testcase classname="src/components.test.tsx" name="numeric evidence &gt; never turns missing/invalid &quot; &quot; into a metric" time="0.00043081">
+        </testcase>
+        <testcase classname="src/components.test.tsx" name="numeric evidence &gt; never turns missing/invalid &quot;NaN&quot; into a metric" time="0.000311064">
+        </testcase>
+        <testcase classname="src/components.test.tsx" name="numeric evidence &gt; never turns missing/invalid null into a metric" time="0.000328733">
+        </testcase>
+        <testcase classname="src/components.test.tsx" name="numeric evidence &gt; never turns missing/invalid true into a metric" time="0.000351534">
+        </testcase>
+        <testcase classname="src/components.test.tsx" name="numeric evidence &gt; never turns missing/invalid {} into a metric" time="0.000300939">
+        </testcase>
+        <testcase classname="src/components.test.tsx" name="numeric evidence &gt; never turns missing/invalid undefined into a metric" time="0.000613709">
+        </testcase>
+        <testcase classname="src/components.test.tsx" name="numeric evidence &gt; accepts decimal API strings and actual zeros" time="0.034859686">
+        </testcase>
+        <testcase classname="src/components.test.tsx" name="equity and benchmark evidence &gt; renders an honest empty chart without a synthetic placeholder SVG" time="0.056893147">
+        </testcase>
+        <testcase classname="src/components.test.tsx" name="equity and benchmark evidence &gt; plots only valid observations, including actual benchmarks, and supports keyboard inspection" time="0.18733899">
+        </testcase>
+        <testcase classname="src/components.test.tsx" name="equity and benchmark evidence &gt; handles a single constant observation without non-finite SVG coordinates" time="0.017033101">
+        </testcase>
+        <testcase classname="src/components.test.tsx" name="exposure and audit &gt; does not infer exposure from missing account values" time="0.006097361">
+        </testcase>
+        <testcase classname="src/components.test.tsx" name="exposure and audit &gt; calculates weights only from returned cash, marks, and equity" time="0.012986488">
+        </testcase>
+        <testcase classname="src/components.test.tsx" name="exposure and audit &gt; sorts mixed audit sources newest first and preserves engine payloads" time="0.020081973">
+        </testcase>
+    </testsuite>
+</testsuites>

@@ -1,0 +1,21 @@
+wybuild: scope=wybuild-ecd8bedd-1dc2-4b30-a9bb-40b3c7fb284c.scope parent=wybuild.slice
+Running scope as unit: wybuild-ecd8bedd-1dc2-4b30-a9bb-40b3c7fb284c.scope
+
+> quantlab-console@0.1.0 test
+> vitest run --maxWorkers=2 --maxWorkers=2 --reporter=default --reporter=junit --outputFile=/home/zyc/Documents/Qoder/2026-11-21/2d80d420/reports/frontend-round2.xml
+
+file:///home/zyc/Documents/Qoder/2026-11-21/2d80d420/frontend/node_modules/vitest/dist/chunks/cac.DzDtg8hz.js:2193
+			throw new Error(`Expected a single value for option "${command}", received [${received}]`);
+			      ^
+
+Error: Expected a single value for option "--maxWorkers <workers>", received [2, 2]
+    at transform (file:///home/zyc/Documents/Qoder/2026-11-21/2d80d420/frontend/node_modules/vitest/dist/chunks/cac.DzDtg8hz.js:2193:10)
+    at setDotProp (file:///home/zyc/Documents/Qoder/2026-11-21/2d80d420/frontend/node_modules/vitest/dist/chunks/cac.DzDtg8hz.js:209:22)
+    at CAC.mri (file:///home/zyc/Documents/Qoder/2026-11-21/2d80d420/frontend/node_modules/vitest/dist/chunks/cac.DzDtg8hz.js:593:9)
+    at CAC.parse (file:///home/zyc/Documents/Qoder/2026-11-21/2d80d420/frontend/node_modules/vitest/dist/chunks/cac.DzDtg8hz.js:510:27)
+    at file:///home/zyc/Documents/Qoder/2026-11-21/2d80d420/frontend/node_modules/vitest/dist/cli.js:11:13
+    at ModuleJob.run (node:internal/modules/esm/module_job:561:25)
+    at async node:internal/modules/esm/loader:647:26
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5)
+
+Node.js v24.22.3
