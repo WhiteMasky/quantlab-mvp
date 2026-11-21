@@ -21,7 +21,10 @@ export async function request<T>(path: string, body?: unknown, signal?: AbortSig
     });
   } catch (error) {
     if (error && typeof error === 'object' && 'name' in error && error.name === 'AbortError') throw error;
-    throw new ApiError('无法连接本地服务。请检查 127.0.0.1:8000；未生成任何替代结果。');
+    throw new ApiError('无法连接服务。请刷新页面检查登录状态及服务进程；未生成任何替代结果，请勿重复提交上一操作。');
+  }
+  if (response.status === 401) {
+    throw new ApiError('访问会话已过期或未授权。请刷新页面完成邮箱验证；请勿重复提交上一操作。', 401);
   }
   let payload: unknown;
   try {

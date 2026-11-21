@@ -1,0 +1,10 @@
+{
+  "status": "passed",
+  "anonymous_get_paths": 5,
+  "anonymous_mutation_paths": 3,
+  "forged_authentication_status": 401,
+  "persistent_snapshot_unchanged": true,
+  "live_enabled": false,
+  "authenticated_browser_verified": false,
+  "requires_owner_email_otp": true
+}

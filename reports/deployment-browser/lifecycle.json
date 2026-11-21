@@ -1,0 +1,10 @@
+{
+  "slow_body_status": 408,
+  "slow_body_seconds": 10.003,
+  "parent_only_sigterm": "passed",
+  "shutdown_seconds": 10.171,
+  "connector_children_gone": true,
+  "ledger_deleted": false,
+  "restart_preserves_full_snapshot": true,
+  "original_development_service_unchanged": true
+}

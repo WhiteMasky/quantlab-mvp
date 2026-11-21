@@ -1,0 +1,47 @@
+{
+  "environment": "SIMULATED",
+  "live_enabled": false,
+  "scope": "current_execution_ledger",
+  "fills": [
+    {
+      "fill_id": "sim-4c343baf57e597e4f44c8274a0de0a20:fill:1",
+      "order_id": "sim-4c343baf57e597e4f44c8274a0de0a20",
+      "symbol": "IWM",
+      "side": "BUY",
+      "quantity": 32,
+      "price": "227.4018",
+      "commission": "1.0000",
+      "at": "2024-01-04T14:30:00+00:00"
+    },
+    {
+      "fill_id": "sim-29ceac2851cfdc1e2059ef3a76760b6d:fill:1",
+      "order_id": "sim-29ceac2851cfdc1e2059ef3a76760b6d",
+      "symbol": "QQQ",
+      "side": "BUY",
+      "quantity": 38,
+      "price": "170.9975",
+      "commission": "1.0000",
+      "at": "2024-01-04T14:30:00+00:00"
+    },
+    {
+      "fill_id": "sim-9dccec9aeb23ddbd6f4738c59ebc81a0:fill:1",
+      "order_id": "sim-9dccec9aeb23ddbd6f4738c59ebc81a0",
+      "symbol": "SPY",
+      "side": "BUY",
+      "quantity": 168,
+      "price": "43.7787",
+      "commission": "1.0000",
+      "at": "2024-01-04T14:30:00+00:00"
+    },
+    {
+      "fill_id": "sim-836e411e612746adf87fc4ea26d7b128:fill:1",
+      "order_id": "sim-836e411e612746adf87fc4ea26d7b128",
+      "symbol": "TLT",
+      "side": "BUY",
+      "quantity": 38,
+      "price": "225.1276",
+      "commission": "1.0000",
+      "at": "2024-01-04T14:30:00+00:00"
+    }
+  ]
+}

@@ -32,6 +32,16 @@ describe('same-origin contract client', () => {
     await expect(request('/api/risk/halt', { halted: true, reason: 'test' })).rejects.toBeInstanceOf(ApiError);
     expect(fetchMock).toHaveBeenCalledTimes(1);
   });
+  it('explains an expired protected-tunnel session without retrying a mutation', async () => {
+    fetchMock.mockResolvedValue(new Response('Unauthorized', { status: 401 }));
+    await expect(request('/api/runs', {})).rejects.toThrow(/邮箱验证.*勿重复提交/);
+    expect(fetchMock).toHaveBeenCalledTimes(1);
+  });
+  it('does not mistake a login redirect HTML page for platform state', async () => {
+    fetchMock.mockResolvedValue(new Response('<html>Email login</html>', { status: 200 }));
+    await expect(fetchState()).rejects.toThrow(/非 JSON/);
+    expect(fetchMock).toHaveBeenCalledTimes(1);
+  });
   it('propagates aborts so StrictMode cleanup does not appear as an API failure', async () => {
     const error = new DOMException('Aborted', 'AbortError');
     fetchMock.mockRejectedValue(error);

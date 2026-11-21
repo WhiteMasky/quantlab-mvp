@@ -1,0 +1,128 @@
+{
+  "started_at": "2026-11-21T19:21:09.311Z",
+  "baseURL": "http://127.0.0.1:18900",
+  "browser": "138.0.7204.157",
+  "checks": [
+    "empty state has real initial cash and no fabricated return",
+    "invalid lookback rejected before submission",
+    "trend real computation, equity, benchmark, drawdown and simulated fills",
+    "all six desktop pages render without horizontal document overflow",
+    "order search, fill tab and actual record download",
+    "identical experiment replays sealed evidence without duplicate fills",
+    "emergency halt is acknowledged while research is still busy",
+    "halt prevents new submissions; cancellation separately authorized and never liquidates",
+    "390px mobile menu, overview and order table keep content within viewport",
+    "injected 503 preserves stale evidence and explicit refresh recovers"
+  ],
+  "research": {
+    "trend": {
+      "run_id": "82d07fd0-77f1-4d75-bbf5-d424b7e79b5c",
+      "metrics": {
+        "total_return": -0.052550818000000055,
+        "annualized_return": -0.02662998710665021,
+        "max_drawdown": 0.09107186845730908,
+        "drawdown_duration": 381,
+        "volatility": 0.04207359127815375,
+        "sharpe": -0.6204767158172992,
+        "sortino": -0.8322335731888846,
+        "turnover": 37.269070110115166,
+        "fee_ratio": 0.00812905,
+        "market_exposure": 0.5390241180364277,
+        "sample_size": 504,
+        "explanations": {},
+        "definitions": {
+          "frequency": "last snapshot per New York session date; consecutive daily sessions assumed",
+          "annualization": "252 trading sessions/year; zero risk-free and downside target",
+          "drawdown_duration": "maximum consecutive observed underwater sessions; recovery day excluded",
+          "turnover": "sum absolute executed notional / mean EOD equity; not annualized or halved",
+          "fee_ratio": "explicit commissions / capital immediately before scored period",
+          "market_exposure": "mean gross USD position notional / EOD equity",
+          "sample_size": "scored daily EOD observations, including initial-capital-to-first return"
+        }
+      },
+      "verdict": "NOT_VALIDATED_SYNTHETIC",
+      "selected_parameters": {
+        "lookback": 126,
+        "skip": 5,
+        "top_n": 2
+      },
+      "execution": {
+        "orders": 4,
+        "fills": 4,
+        "rejections": [],
+        "clock": "2024-01-04T14:30:00+00:00",
+        "mode": "HISTORICAL_SYNTHETIC_REPLAY"
+      }
+    },
+    "momentum": {
+      "run_id": "51ee2560-b290-4f41-9b6f-baf177375b69",
+      "metrics": {
+        "total_return": -0.03630254199999994,
+        "annualized_return": -0.01831906507256642,
+        "max_drawdown": 0.07803032603886195,
+        "drawdown_duration": 376,
+        "volatility": 0.040198546138123244,
+        "sharpe": -0.4398661637965962,
+        "sortino": -0.6143124519002129,
+        "turnover": 34.75448464479996,
+        "fee_ratio": 0.005207799999999999,
+        "market_exposure": 0.4555780467855694,
+        "sample_size": 504,
+        "explanations": {},
+        "definitions": {
+          "frequency": "last snapshot per New York session date; consecutive daily sessions assumed",
+          "annualization": "252 trading sessions/year; zero risk-free and downside target",
+          "drawdown_duration": "maximum consecutive observed underwater sessions; recovery day excluded",
+          "turnover": "sum absolute executed notional / mean EOD equity; not annualized or halved",
+          "fee_ratio": "explicit commissions / capital immediately before scored period",
+          "market_exposure": "mean gross USD position notional / EOD equity",
+          "sample_size": "scored daily EOD observations, including initial-capital-to-first return"
+        }
+      },
+      "verdict": "NOT_VALIDATED_SYNTHETIC",
+      "selected_parameters": {
+        "lookback": 126,
+        "skip": 5,
+        "top_n": 2
+      },
+      "execution": {
+        "orders": 0,
+        "fills": 0,
+        "rejections": [
+          {
+            "symbol": "QQQ",
+            "reasons": [
+              "halted"
+            ]
+          },
+          {
+            "symbol": "TLT",
+            "reasons": [
+              "halted"
+            ]
+          },
+          {
+            "symbol": "IWM",
+            "reasons": [
+              "halted"
+            ]
+          },
+          {
+            "symbol": "SPY",
+            "reasons": [
+              "halted"
+            ]
+          }
+        ],
+        "clock": "2024-01-04T14:30:00+00:00",
+        "mode": "HISTORICAL_SYNTHETIC_REPLAY"
+      }
+    }
+  },
+  "halt_confirmation_ms": 415,
+  "console_errors": [
+    "Failed to load resource: the server responded with a status of 503 (Service Unavailable)"
+  ],
+  "finished_at": "2026-11-21T19:22:02.704Z",
+  "status": "passed"
+}

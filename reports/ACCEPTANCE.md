@@ -2,16 +2,30 @@
 
 ## 交付判断
 
-**离线研究与模拟执行 Demo 已可运行，完成两轮完整集成及定向修复复测，未进行第三轮。** 这是本机研究软件 MVP，不是生产交易系统；IBKR 实际连接、纸盘交易和完整外部账户对账尚未验证或完成。
+**初版离线研究与模拟执行 MVP 在两轮完整集成及定向修复后交付；后续免费受保护部署进行了第三轮完整回归，详见下节。** 这不是生产交易系统；IBKR 实际连接、纸盘交易和完整外部账户对账尚未验证或完成。
 
-- Web：http://127.0.0.1:15173；API：http://127.0.0.1:18765。仅回环地址，无公网部署。
+- 原本地开发入口：Web http://127.0.0.1:15173；API http://127.0.0.1:18765，仅回环地址。新增可选的受保护公网 Demo 不改变这些默认设置。
 - 启动、安装、架构及安全说明：[README](../README.md)。
 - 最终效果：[桌面](demo-final.png)、[390px 移动端](demo-mobile-final.png)。已用浏览器实际操作并人工查看截图，不以构建成功替代 UI 验收。
 - 原始研究：[趋势 JSON](demo-trend.json)、[动量 JSON](demo-momentum.json)；可读结论：[研究报告](RESEARCH.md)。
 - IBKR 本地配置及纸环境准备边界：[IBKR 指南](../docs/IBKR.md)。
 - 报告机器时间以证据中的 UTC 为准；本次浏览器检查发生于 2026-11-21 18:05—18:12 UTC（UTC+8 为 2026-11-22）。
 
-## 真实测试记录
+## 免费受保护部署增量验收（2026-11-22 UTC+8）
+
+用户选择保留完整功能、零新增云服务费。本机 Python/SQLite 与生产静态资源通过 Cloudflare protected Quick Tunnel 分享给一个指定邮箱；没有启用付费计划、域名服务或真实券商连接。地址重启变化，本机离线则不可访问。
+
+- 第三轮全量 Python：**1,136 passed，1 warning，93.65s**，[JUnit](python-deployment.xml)。之后仅对部署边界、DNS/边缘路由就绪和登录回跳做定向补测，最终 **71 passed**，[JUnit](deployment-boundary-release.xml)；未进行第四轮全量集成。
+- 前端 **45 passed**，TypeScript 与 Vite 生产构建通过；新增 401/登录页响应提示，不自动重发写操作。
+- 新的独立运行目录执行了全部 **10 项真实 Chrome 流程**：六页、两个策略、封存重放去重、搜索导出、忙时 Halt、独立授权撤单、390px 布局和注入 503 恢复；**没有非预期控制台错误**。[完整记录](deployment-browser/browser-acceptance.json)、[桌面](deployment-browser/demo-overview.png)、[移动端](deployment-browser/demo-mobile.png)。此次 Halt 确认 **415ms**。
+- 匿名根页面与全部读 API 跳转官方邮箱登录；三个写 API 返回 **401**，伪造身份头和 Cookie 仍返回 **401**。真实 Chrome 到达 [Cloudflare 邮箱登录页截图](deployment-browser/public-login.png)，没有自动发送验证码。
+- 仅向本次 Python 父进程发 SIGTERM：约 **10.17s** 后服务和连接器退出，无孤儿隧道；慢请求 **10.003s** 后返回 **408**。重启后订单、4 笔模拟成交、组合、实验、封存结果、Halt 状态均完全一致，原开发服务不受影响。[生命周期证据](deployment-browser/lifecycle.json)。
+- 初次启动曾遇到 DNS 尚不可用，第二次未取得预期认证重定向，均在放行数据前停止；增加有时限的 DNS/边缘路由就绪检查后通过。不会把普通 200 页面或 403 拒绝当作认证通过，也不会退回无保护隧道。
+- 登录回跳只允许跨站的顶层静态文档导航；API 跨站读取/写入和 iframe 仍被拒绝。原本地 API guard 不变，源站不信任转发身份头。真实 Chrome 定向验证了模拟登录回跳头、401 会话失效提示、禁止盲重试和刷新恢复，[发布复测](deployment-browser/release-retest.json)；最终入口再次通过 [公网匿名门禁与持久化核验](deployment-browser/public-boundary.json)。
+
+**尚未代替用户完成邮箱验证码登录，因此登录后的真实公网操作仍待用户本人验收。** 本机完整功能、匿名公网防护和登录页展示是不同验证层次，不将它们混称为已完成认证端到端验收。合成策略依然验证不通过；公网分享不会使其变成投资证据或可实盘系统。
+
+## 初版 MVP 真实测试记录
 
 ### 完整集成轮次
 

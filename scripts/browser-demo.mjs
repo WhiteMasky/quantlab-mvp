@@ -1,8 +1,16 @@
 import assert from 'node:assert/strict';
-import { writeFile } from 'node:fs/promises';
+import { access, writeFile } from 'node:fs/promises';
 import { chromium } from '../frontend/node_modules/playwright-core/index.mjs';
 
-const baseURL = 'http://127.0.0.1:15173';
+const baseURL = process.env.DEMO_BASE_URL || 'http://127.0.0.1:15173';
+const reportDir = process.env.DEMO_REPORT_DIR || 'reports';
+await access(reportDir);
+try {
+  await access(`${reportDir}/browser-acceptance.json`);
+  throw new Error('Existing browser evidence must not be overwritten; choose a fresh DEMO_REPORT_DIR.');
+} catch (error) {
+  if (error.code !== 'ENOENT') throw error;
+}
 const browser = await chromium.launch({ executablePath: process.env.CHROME_PATH || '/usr/bin/google-chrome', headless: true });
 const context = await browser.newContext({ viewport: { width: 1440, height: 1100 }, deviceScaleFactor: 1 });
 const page = await context.newPage();
@@ -16,7 +24,7 @@ const navigation = page.getByRole('complementary', { name: '主导航' });
 const go = async name => navigation.getByRole('button', { name, exact: true }).click();
 async function screenshot(name, fullPage = false) {
   await page.evaluate(() => window.scrollTo(0, 0));
-  await page.screenshot({ path: `reports/${name}.png`, fullPage, animations: 'disabled' });
+  await page.screenshot({ path: `${reportDir}/${name}.png`, fullPage, animations: 'disabled' });
 }
 async function run(strategy) {
   await go('策略研究');
@@ -49,7 +57,7 @@ try {
   const trend = await run('trend');
   evidence.research.trend = { run_id: trend.run_id, metrics: trend.result.metrics, verdict: trend.validation.verdict,
     selected_parameters: trend.validation.selected_parameters, execution: trend.execution };
-  await writeFile('reports/demo-trend.json', JSON.stringify(trend));
+  await writeFile(`${reportDir}/demo-trend.json`, JSON.stringify(trend));
   assert.ok(trend.execution.fills > 0);
   const afterTrend = await apiState();
   await go('总览');
@@ -73,7 +81,7 @@ try {
   const downloadEvent = page.waitForEvent('download');
   await page.getByRole('button', { name: '导出当前记录' }).click();
   const download = await downloadEvent;
-  await download.saveAs('reports/demo-fills-export.json');
+  await download.saveAs(`${reportDir}/demo-fills-export.json`);
   check('order search, fill tab and actual record download');
   const repeated = await run('trend');
   assert.equal(repeated.replayed_from_sealed_result, true);
@@ -104,7 +112,7 @@ try {
   assert.equal(momentum.execution.orders, 0);
   assert.equal(momentum.execution.fills, 0);
   assert.equal(momentum.validation.passed, false);
-  await writeFile('reports/demo-momentum.json', JSON.stringify(momentum));
+  await writeFile(`${reportDir}/demo-momentum.json`, JSON.stringify(momentum));
   evidence.research.momentum = { run_id: momentum.run_id, metrics: momentum.result.metrics,
     verdict: momentum.validation.verdict, selected_parameters: momentum.validation.selected_parameters,
     execution: momentum.execution };
@@ -154,11 +162,11 @@ try {
   evidence.console_errors = errors;
   evidence.finished_at = new Date().toISOString();
   evidence.status = 'passed';
-  await writeFile('reports/browser-acceptance.json', JSON.stringify(evidence, null, 2));
+  await writeFile(`${reportDir}/browser-acceptance.json`, JSON.stringify(evidence, null, 2));
   console.log(JSON.stringify(evidence));
 } catch (error) {
   evidence.status = 'failed'; evidence.error = String(error); evidence.console_errors = errors;
-  await writeFile('reports/browser-acceptance.json', JSON.stringify(evidence, null, 2));
+  await writeFile(`${reportDir}/browser-acceptance.json`, JSON.stringify(evidence, null, 2));
   throw error;
 } finally {
   await browser.close();

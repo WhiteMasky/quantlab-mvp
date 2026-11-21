@@ -1,6 +1,6 @@
 # QuantLab · 本地量化研究与模拟执行 MVP
 
-**研究软件，不是可实盘系统。默认完全离线。** UI/API 仅绑定回环地址，没有公网部署、真实交易或账号权限操作。合成收益不是市场历史，更不是投资证据。
+**研究软件，不是可实盘系统。默认完全离线。** UI/API 仅绑定回环地址；明确启用下述受保护分享脚本后，才通过邮箱验证的临时隧道提供远程访问。不连接真实券商、不修改账户权限。合成收益不是市场历史，更不是投资证据。
 
 ## 启动 Demo
 
@@ -34,6 +34,31 @@ npm --prefix frontend ci
 ```
 
 本机额外使用 `.tools/node/bin` 下的 Node；启动脚本会优先使用它。`requirements.lock` 与 `frontend/package-lock.json` 保存本次依赖版本。安装时需要软件包网络访问，不会下载市场数据或安装 IBKR SDK。
+
+## 免费、邮箱保护的完整 Demo
+
+这是**本机计算 + Cloudflare 受保护 Quick Tunnel**，不是免费云端托管。没有新增云服务费，不需要域名或付费 Workers；本机必须在线。临时网址在重新启动后变化，没有生产可用性保证。
+
+先完成依赖安装和生产前端构建，再安装已固定校验值的官方 Linux x64 客户端：
+
+```bash
+mkdir -p .tools/cloudflared
+gh release download 2026.11.1 --repo cloudflare/cloudflared \
+  --pattern cloudflared-linux-amd64 --dir .tools/cloudflared
+chmod +x .tools/cloudflared/cloudflared-linux-amd64
+npm --prefix frontend run build
+.venv/bin/python scripts/share_demo.py --email 'your-email@example.com'
+```
+
+- 启动器验证官方二进制 SHA-256、邮箱保护参数和单一邮箱策略。只允许一个完整邮箱，拒绝通配符；没有无认证回退。
+- 只有根页面和全部 API 的匿名 GET 均跳转官方登录、三个写接口的匿名 POST 均返回 401 后，才启用打印出的 HTTPS 地址。访问者通过该邮箱收到的一次性验证码登录。
+- 本机生产 UI 为 `http://127.0.0.1:18900`，不是 Vite 开发服务器；计算与 SQLite 存储均留在本机。重启仍使用 `runtime/shared-demo/data`，不覆盖原 `runtime` 中的实验和账本，不自动重跑实验。
+- `runtime/shared-demo/share-status.json` 保存本次地址与状态，`tunnel.log` 保存本机诊断。运行目录、邮箱配置和任何凭据都不要提交到 GitHub。
+- 精确校验当前 Host、Origin、Referer 与浏览器跨站标记后，才把已验证请求交给原本地 API；不信任转发身份头，也不开放通配 CORS。官方连接器在转发前验证认证断言、邮箱白名单与会话，不以“存在某个身份头”代替认证。
+- `Ctrl+C` 停止分享及本次服务，不删除账本、不自动撤单或清仓。原本地开发服务互不影响。再次执行同一命令即可重启，分享新打印的地址。
+- 邮箱验证码必须由访问者本人完成。自动化的匿名拦截和本机完整功能测试不能替代真实的登录后公网验收。会话过期时刷新页面重新登录，不要盲目重发上一次写操作。
+
+官方说明：[Protected Quick Tunnels](https://developers.cloudflare.com/tunnel/get-started/quick-tunnels/)。本入口仍仅提供合成研究和模拟执行，没有真实 IBKR 下单能力。
 
 ## 命令行与本地数据
 
@@ -92,7 +117,7 @@ PATH="$PWD/.tools/node/bin:$PATH" npm --prefix frontend run build
 
 具体实际执行次数、浏览器验收和问题见 `reports/ACCEPTANCE.md`。使用 Wuying 桌面时，重型测试/构建通过 `/usr/local/bin/wybuild -- ...` 隔离执行。
 
-`scripts/browser-demo.mjs` 使用已安装的 Google Chrome（默认 `/usr/bin/google-chrome`，可通过 `CHROME_PATH` 指定），不下载浏览器。它会实际产生离线实验、模拟成交和风控审计，并要求空的初始账本；不要针对已交付 Demo 直接重跑、删除账本或覆盖既有报告。日常查看不需要执行该脚本。
+`scripts/browser-demo.mjs` 使用已安装的 Google Chrome（默认 `/usr/bin/google-chrome`，可通过 `CHROME_PATH` 指定），不下载浏览器。它会实际产生离线实验、模拟成交和风控审计，并要求空的初始账本；不要针对已交付 Demo 直接重跑、删除账本或覆盖既有报告。可用 `DEMO_BASE_URL` 指定待测实例、用 `DEMO_REPORT_DIR` 指定已创建的新证据目录；脚本拒绝覆盖已有浏览器验收记录。日常查看不需要执行该脚本。
 
 ## 不应被忽略的限制
 

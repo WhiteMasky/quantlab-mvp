@@ -1,0 +1,10 @@
+{
+  "status": "passed",
+  "cross_site_document_navigation_headers": "simulated in real Chrome; not an OTP login",
+  "expired_session_401_ui": "passed",
+  "uncertain_mutation_not_retried": true,
+  "refresh_recovery": true,
+  "fills_unchanged": true,
+  "page_errors": [],
+  "authenticated_public_flow": "not performed; requires owner email OTP"
+}
